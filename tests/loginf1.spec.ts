@@ -15,8 +15,13 @@ import { spec } from 'node:test/reporters';
       await loginPage.loginWithEnvCredentials();
     });
 
+    await test.step("Validar credenciales incorrectas", async () => {
+      await loginPage.validateLogin();
+    });
+
     await test.step("Validamos el URL de Inventario", async () => {  
       await expect(page).toHaveURL(/.*inventory*/);
+
       await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
     });
 
