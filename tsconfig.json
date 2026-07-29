@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "sourceMap": true,
+    "strict": true,
+    "types": ["node", "@playwright/test"]
+  },
+  "include": ["src/**/*", "tests/**/*", "playwright.config.ts"]
+}
