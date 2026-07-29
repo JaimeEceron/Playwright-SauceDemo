@@ -10,18 +10,18 @@ import { spec } from 'node:test/reporters';
 
       const loginPage = new LoginPage(page);
 
-      await test.step("Abrir navegador en el Login", async () => {
+    await test.step("Abrir navegador en el Login", async () => {
       await loginPage.navigateToLoginPage();
       await loginPage.loginWithEnvCredentials();
+    });
 
+    await test.step("Validamos el URL de Inventario", async () => {  
       await expect(page).toHaveURL(/.*inventory*/);
       await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
-
-
-
-
     });
 
     });
-});
+
+  });
+
 });

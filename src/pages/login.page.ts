@@ -9,8 +9,6 @@ export class LoginPage {
 
   constructor(page: Page) {
     this.page = page;
-
-    // Identificamos los elementos usando atributos data-test de SauceDemo
     this.usernameInput = page.locator('[data-test="username"]');
     this.passwordInput = page.locator('[data-test="password"]');
     this.loginButton = page.locator('[data-test="login-button"]');
