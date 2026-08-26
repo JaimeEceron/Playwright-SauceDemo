@@ -1,7 +1,7 @@
 import { test, Browser, Page, expect } from '@playwright/test';
 import { LoginPage } from '../src/pages/login.page';
 import { spec } from 'node:test/reporters';
- 
+
  test.describe("Automatizacion en SauceDemo", () => {
 
   test("SauceDemo", async ({ page }) => {
@@ -21,12 +21,20 @@ import { spec } from 'node:test/reporters';
 
     await test.step("Validamos el URL de Inventario", async () => {  
       await expect(page).toHaveURL(/.*inventory*/);
-
-      await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
     });
 
+    await test.step("Validar el titulo de Inventario", async () => {
+      await expect(page).toHaveTitle("Swag Labs");
     });
+
+    await test.step("Ordenamos los productos de la Z-A", async () => {
+      await page.locator('[data-test="product-sort-container"]').selectOption("Name (Z to A)");
+      await expect(page.locator('[data-test="product-sort-container"]')).toHaveValue("za");      
+      console.log("Opcion seleccionada correctamente Z - A");
+    });
+
+    
 
   });
-
+});
 });
