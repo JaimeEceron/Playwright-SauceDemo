@@ -1,10 +1,9 @@
 import { test, Browser, Page, expect } from '@playwright/test';
 import { LoginPage } from '../src/pages/login.page';
-import { spec } from 'node:test/reporters';
 
  test.describe("Automatizacion en SauceDemo", () => {
 
-  test("SauceDemo", async ({ page }) => {
+  test("Validando carrito de compras", async ({ page }) => {
 
     await test.step("Configuramos LoginPage ", async () => {
 
@@ -33,7 +32,22 @@ import { spec } from 'node:test/reporters';
       console.log("Opcion seleccionada correctamente Z - A");
     });
 
-    
+    await test.step("Añadimos 1 articulo al carrito para su validación", async() =>{
+      await page.locator('[data-test="add-to-cart-test.allthethings()-t-shirt-(red)"]').click();
+      await expect(page.locator('[data-test="shopping-cart-link"]')).toHaveText("1");
+      console.log("Se ha añadido la playera roja al carrito validando un articulo en el carrito")
+    });
+
+    await test.step("Entramos al carrito a validar que se coloco la playera roja", async() =>{
+      await page.locator('[data-test="shopping-cart-link"]').click();
+      await expect(page.locator('[data-test="item-3-title-link"]')).toContainText("T-Shirt (Red)");
+      console.log("Se valdo que existe el articulo en el carrito")
+    });
+
+    await test.step("Removemos la playera roja y salimos con el boton de Continuar Comprando", async() =>{
+      await page.locator('[data-test="remove-test.allthethings()-t-shirt-(red)"]').click();
+      await page.locator('[data-test="continue-shopping"]').click();
+    });
 
   });
 });
