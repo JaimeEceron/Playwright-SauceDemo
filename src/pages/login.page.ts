@@ -19,7 +19,7 @@ export class LoginPage {
   }
 
   async navigateToLoginPage() {
-    await this.page.goto('/');
+    await this.page.goto('https://www.saucedemo.com/');
   }
 
   async validateLogin() {
@@ -36,8 +36,8 @@ export class LoginPage {
     const username = process.env.SAUCE_USERNAME || '';
     const password = process.env.SAUCE_PASSWORD || '';
 
-    await this.usernameInput.fill(username);
-    await this.passwordInput.fill(password);
+    await this.usernameInput.fill("standard_user");
+    await this.passwordInput.fill("secret_sauce");
     await this.loginButton.click();
   }
 }

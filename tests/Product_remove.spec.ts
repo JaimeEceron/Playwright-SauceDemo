@@ -48,7 +48,7 @@ import { LoginPage } from '../src/pages/login.page';
       await page.locator('[data-test="remove-test.allthethings()-t-shirt-(red)"]').click();
       await page.locator('[data-test="continue-shopping"]').click();
     });
-
+    
   });
 });
 });
