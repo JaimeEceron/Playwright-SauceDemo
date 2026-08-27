@@ -1,5 +1,6 @@
 import { test, Browser, Page, expect } from '@playwright/test';
 import { LoginPage } from '../src/pages/login.page';
+import { CheckoutPage } from '../src/pages/checkout.page';
 
  test.describe("Vaidando en Sauce Demo", () => {
 
@@ -8,6 +9,7 @@ import { LoginPage } from '../src/pages/login.page';
     await test.step("}LoginPage ", async () => {
 
       const loginPage = new LoginPage(page);
+      const checkoutPage = new CheckoutPage(page);
 
     await test.step("Abrir navegador en el Login", async () => {
       await loginPage.navigateToLoginPage();
@@ -38,14 +40,17 @@ import { LoginPage } from '../src/pages/login.page';
         await expect(page.locator('[data-test="shopping-cart-link"]')).toHaveText("3");
     });
 
-    await test.step("Entramos a carrito para validar os articulos seleccionados", async () => {
+    await test.step("Entramos a carrito para validar los articulos seleccionados", async () => {
         await page.locator('[data-test="shopping-cart-link"]').click();
         await expect(page.getByRole("link", { name: "Sauce Labs Fleece Jacket" })).toBeVisible();
         await expect(page.getByRole("link", { name: "Sauce Labs Bolt T-Shirt" })).toBeVisible();
         await expect(page.getByRole("link", { name: "Sauce Labs Onesie" })).toBeVisible();
     });
 
-
+    await test.step("Realizamos el Checkout llenando la informacion mediante POM", async () => {
+      await page.locator('[data-test="checkout"]').click();
+      await checkoutPage.checkoutInfo();
+    });
 
 });
 });
